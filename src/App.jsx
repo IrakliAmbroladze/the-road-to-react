@@ -3,12 +3,14 @@
 // import viteLogo from "/vite.svg";
 import "./App.css";
 
+const title = "React";
 function App() {
   // const [count, setCount] = useState(0);
-
   return (
     <div>
-      <h1>Hello React</h1>
+      <h1>Hello {title}</h1>
+      <label htmlFor="input">My input: </label>
+      <input id="input"></input>
     </div>
   );
 }
