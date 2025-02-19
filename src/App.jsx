@@ -1,9 +1,10 @@
+import * as React from "react";
+
 const Search = () => {
+  const [searchTerm, setSearchTerm] = React.useState("books");
+  console.log(searchTerm);
   const handleChange = (event) => {
-    // synthetic event
-    // console.log(event);
-    // value of target (here: input HTML element)
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
   return (
     <div>
