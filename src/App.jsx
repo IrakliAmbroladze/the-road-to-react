@@ -1,7 +1,7 @@
 import * as React from "react";
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = React.useState("books");
+  const [searchTerm, setSearchTerm] = React.useState("");
   console.log(searchTerm);
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -15,6 +15,7 @@ const Search = () => {
 };
 
 function App() {
+  console.log("App renders");
   const stories = [
     {
       title: "React",
@@ -34,13 +35,16 @@ function App() {
     },
   ];
 
-  const List = (props) => (
-    <ul>
-      {props.list.map((item) => (
-        <Item key={item.objectID} item={item} />
-      ))}
-    </ul>
-  );
+  const List = (props) => {
+    console.log("List renders");
+    return (
+      <ul>
+        {props.list.map((item) => (
+          <Item key={item.objectID} item={item} />
+        ))}
+      </ul>
+    );
+  };
 
   const Item = (props) => (
     <li>
