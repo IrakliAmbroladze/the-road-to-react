@@ -13,8 +13,6 @@ const Search = (props) => {
 };
 
 function App() {
-  console.log("App renders");
-
   const stories = [
     {
       title: "React",
@@ -41,12 +39,10 @@ function App() {
   };
 
   const searchedStories = stories.filter((story) =>
-    story.title.includes(searchTerm)
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  console.log(searchTerm);
 
   const List = (props) => {
-    console.log("List renders");
     return (
       <ul>
         {props.list.map((item) => (
