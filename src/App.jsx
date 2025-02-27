@@ -1,12 +1,7 @@
 import * as React from "react";
 
 const Search = (props) => {
-  //i think this is not necessary for current situation
-  const [searchTerm, setSearchTerm] = React.useState("");
-  console.log(searchTerm);
   const handleChange = (event) => {
-    //i think this is not necessary for current situation
-    setSearchTerm(event.target.value);
     props.onSearch(event);
   };
   return (
@@ -39,9 +34,16 @@ function App() {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = React.useState("");
+
   const handleSearch = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
   };
+
+  const searchedStories = stories.filter((story) =>
+    story.title.includes(searchTerm)
+  );
+  console.log(searchTerm);
 
   const List = (props) => {
     console.log("List renders");
@@ -70,7 +72,7 @@ function App() {
       <h1>My Hacker Stories</h1>
       <Search onSearch={handleSearch} />
       <hr />
-      <List list={stories} />
+      <List list={searchedStories} />
     </div>
   );
 }
