@@ -37,24 +37,24 @@ function App() {
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const List = (props) => {
+  const List = ({ list }) => {
     return (
       <ul>
-        {props.list.map((item) => (
+        {list.map((item) => (
           <Item key={item.objectID} item={item} />
         ))}
       </ul>
     );
   };
 
-  const Item = (props) => (
+  const Item = ({ item: { title, url, author, num_comments, points } }) => (
     <li>
       <span>
-        <a href={props.item.url}>{props.item.title}</a>
+        <a href={url}>{title}</a>
       </span>
-      <span>{props.item.author}</span>
-      <span>{props.item.num_comments}</span>
-      <span>{props.item.points}</span>
+      <span>{author}</span>
+      <span>{num_comments}</span>
+      <span>{points}</span>
     </li>
   );
 
