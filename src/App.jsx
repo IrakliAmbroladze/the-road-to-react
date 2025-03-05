@@ -37,15 +37,13 @@ function App() {
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const List = ({ list }) => {
-    return (
-      <ul>
-        {list.map((item) => (
-          <Item key={item.objectID} {...item} />
-        ))}
-      </ul>
-    );
-  };
+  const List = ({ list }) => (
+    <ul>
+      {list.map(({ objectID, ...item }) => (
+        <Item key={objectID} {...item} />
+      ))}
+    </ul>
+  );
 
   const Item = ({ title, url, author, num_comments, points }) => (
     <li>
