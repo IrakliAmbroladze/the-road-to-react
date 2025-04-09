@@ -19,7 +19,7 @@ const useStorageState = (key, initialState) => {
 };
 
 function App() {
-  const stories = [
+  const initialStories = [
     {
       title: "React",
       url: "https://reactjs.org/",
@@ -38,7 +38,16 @@ function App() {
     },
   ];
 
+  const [stories, setStories] = React.useState(initialStories);
   const [searchTerm, setSearchTerm] = useStorageState("search", "React");
+
+  const handleRemoveStory = (item) => {
+    const newStories = stories.filter(
+      (story) => item.objectID !== story.objectID
+    );
+
+    setStories(newStories);
+  };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -48,31 +57,41 @@ function App() {
     story.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const List = ({ list }) => (
+  const List = ({ list, onRemoveItem }) => (
     <ul>
-      {list.map(({ objectID, ...item }) => (
-        <Item key={objectID} {...item} />
+      {list.map((item) => (
+        <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem} />
       ))}
     </ul>
   );
 
-  const Item = ({ title, url, author, num_comments, points }) => (
-    <li>
-      <span>
-        <a href={url}>{title}</a>
-      </span>
-      <span>{author}</span>
-      <span>{num_comments}</span>
-      <span>{points}</span>
-    </li>
-  );
+  const Item = ({ item, onRemoveItem }) => {
+    const handleRemoveItem = () => {
+      onRemoveItem(item);
+    };
+    return (
+      <li>
+        <span>
+          <a href={item.url}>{item.title}</a>
+        </span>
+        <span>{item.author}</span>
+        <span>{item.num_comments}</span>
+        <span>{item.points}</span>
+        <span>
+          <button type="button" onClick={handleRemoveItem}>
+            Dismiss
+          </button>
+        </span>
+      </li>
+    );
+  };
 
   return (
     <div>
       <h1>My Hacker Stories</h1>
       <Search search={searchTerm} onSearch={handleSearch} />
       <hr />
-      <List list={searchedStories} />
+      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
     </div>
   );
 }
