@@ -38,7 +38,16 @@ function App() {
     },
   ];
 
-  const [stories, setStories] = React.useState(initialStories);
+  const getAsyncStories = () =>
+    Promise.resolve({ data: { stories: initialStories } });
+
+  React.useEffect(() => {
+    getAsyncStories().then((result) => {
+      setStories(result.data.stories);
+    });
+  }, []);
+
+  const [stories, setStories] = React.useState([]);
   const [searchTerm, setSearchTerm] = useStorageState("search", "React");
 
   const handleRemoveStory = (item) => {
