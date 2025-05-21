@@ -39,7 +39,7 @@ function App() {
   ];
 
   const getAsyncStories = () =>
-    Promise.resolve({ data: { stories: initialStories } });
+    new Promise((resolve) => resolve({ data: { stories: initialStories } }));
 
   React.useEffect(() => {
     getAsyncStories().then((result) => {
