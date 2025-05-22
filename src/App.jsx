@@ -47,6 +47,7 @@ function App() {
     getAsyncStories().then((result) => {
       setStories(result.data.stories);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [stories, setStories] = React.useState([]);
